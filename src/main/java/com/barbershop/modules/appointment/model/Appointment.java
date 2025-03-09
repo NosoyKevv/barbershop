@@ -1,16 +1,14 @@
 package com.barbershop.modules.appointment.model;
 
 import com.barbershop.common.utils.BaseEntity;
-import com.barbershop.modules.person.model.Person;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.barbershop.modules.user.model.Users;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -19,10 +17,13 @@ import java.util.Date;
 @Getter
 @Setter
 public class Appointment extends BaseEntity {
-    private String Description;
+    private String description;
     private Date date;
 
+    @Column(name = "date_time")
+    private Time dateTime;
+
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_person"))
-    private Person person;
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_users"))
+    private Users user;
 }

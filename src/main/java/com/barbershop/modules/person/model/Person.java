@@ -34,9 +34,6 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "fk_person_role"))
     private Roles role;
 
-
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
 }
 
 
