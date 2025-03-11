@@ -20,11 +20,11 @@ public abstract class BaseEntity implements Serializable {
     private Long id;
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_date_time", nullable = false, updatable = false)
     private LocalDateTime createdDateTime;
 
     @UpdateTimestamp
-    @Column(nullable = true)
+    @Column(name = "updated_date_time", nullable = true)
     private LocalDateTime updatedDateTime;
 
     @Override
@@ -33,5 +33,10 @@ public abstract class BaseEntity implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         BaseEntity that = (BaseEntity) o;
         return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
