@@ -24,6 +24,6 @@ public class Appointment extends BaseEntity {
     private Time dateTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_users"))
+    @JoinColumn(name = "user_id", nullable = true, foreignKey = @ForeignKey(name = "fk_appointment_users"))
     private Users user;
 }

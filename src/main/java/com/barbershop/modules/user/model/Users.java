@@ -19,6 +19,7 @@ import java.util.List;
 public class Users extends BaseEntity {
     private String username;
     private String password;
+    private boolean active = true; // Se inicializa como activo
 
     @OneToOne
     @JoinColumn(name = "person_id", unique = true, nullable = false, foreignKey = @ForeignKey(name = "fk_user_person"))

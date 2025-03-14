@@ -11,9 +11,9 @@ INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name
 
 --INSERTAR USUARIOS DEL SISTEMA
 
-INSERT INTO barbershop.users (created_date_time, person_id, password, username)VALUES (current_timestamp, 1, '12345', 'kevin');
-INSERT INTO barbershop.users (created_date_time, person_id, password, username)VALUES (current_timestamp, 2, '12345', 'santiago');
-INSERT INTO barbershop.users (created_date_time, person_id, password, username)VALUES (current_timestamp, 3, '12345', 'pepe');
+INSERT INTO barbershop.users (created_date_time, person_id, password, username,active)VALUES (current_timestamp, 1, '12345', 'kevin',TRUE);
+INSERT INTO barbershop.users (created_date_time, person_id, password, username,active)VALUES (current_timestamp, 2, '12345', 'santiago',TRUE);
+INSERT INTO barbershop.users (created_date_time, person_id, password, username,active)VALUES (current_timestamp, 3, '12345', 'pepe',TRUE);
 
 --INSERTAR CITAS AL SITEMA
 INSERT INTO barbershop.appointment (date_time, created_date_time, date, user_id, description) VALUES ('12:00:00',current_timestamp,'2024-03-09',1,'EL MOICANO')

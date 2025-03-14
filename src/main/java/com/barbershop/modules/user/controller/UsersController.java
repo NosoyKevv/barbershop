@@ -55,9 +55,9 @@ public class UsersController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         this.usersService.deleteUser(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Usuario eliminado correctamente -> " + id);
     }
 }

@@ -52,7 +52,7 @@ public class RolesController {
         return ResponseEntity.ok(rolesDto);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRole(@PathVariable Long id) {
         this.rolesService.deleteRoles(id);
         return ResponseEntity.ok("Rol eliminado correctamente -> " + id);

@@ -1,6 +1,7 @@
 package com.barbershop.modules.user.service;
 
 import com.barbershop.modules.user.model.Users;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface IUsersService {
 
      Users saveUser(Users user);
 
-     void deleteUser(Long id);
+     ResponseEntity<String> deleteUser(Long id);
 
 }
