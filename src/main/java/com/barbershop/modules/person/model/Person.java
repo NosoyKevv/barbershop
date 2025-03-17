@@ -1,7 +1,6 @@
 package com.barbershop.modules.person.model;
 
 import com.barbershop.common.utils.BaseEntity;
-import com.barbershop.modules.appointment.model.Appointment;
 import com.barbershop.modules.role.model.Roles;
 import com.barbershop.modules.user.model.Users;
 import jakarta.persistence.*;
@@ -10,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @AllArgsConstructor

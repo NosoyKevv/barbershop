@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface IPersonRepository {
+public interface IPersonService {
 
     List<Person> findAllPerson();
 
@@ -13,5 +13,5 @@ public interface IPersonRepository {
 
     Person savePerson(Person person);
 
-    ResponseEntity<Person> delete(Long id);
+    ResponseEntity<Void> deletePerson(Long id);
 }
