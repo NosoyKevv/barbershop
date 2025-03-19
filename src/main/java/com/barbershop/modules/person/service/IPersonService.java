@@ -1,6 +1,8 @@
 package com.barbershop.modules.person.service;
 
+import com.barbershop.modules.person.dto.PersonDto;
 import com.barbershop.modules.person.dto.PersonasRolName;
+import com.barbershop.modules.person.dto.RequestPerson;
 import com.barbershop.modules.person.model.Person;
 import org.springframework.http.ResponseEntity;
 
@@ -21,4 +23,6 @@ public interface IPersonService {
     String findNameRolByPerson(Long id);
 
     List<PersonasRolName> findPersonRolesName(Long id);
+
+    ResponseEntity<?> saveRequestPerson(RequestPerson requestPerson);
 }

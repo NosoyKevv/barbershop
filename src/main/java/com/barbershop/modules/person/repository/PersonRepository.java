@@ -22,5 +22,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT new com.barbershop.modules.person.dto.PersonasRolName(p.name,p.lastName,r.name) FROM Person p INNER JOIN p.role r WHERE r.id =:id")
     List<PersonasRolName> findPersonRolesName(@Param("id") Long id);
 
+    //Retorna true si ya hay un usuario con ese email
+    boolean existsByEmail(String email);
+
 
 }

@@ -3,6 +3,7 @@ package com.barbershop.modules.person.controller;
 import com.barbershop.modules.person.dto.PersonDto;
 import com.barbershop.modules.person.dto.PersonRoleDto;
 import com.barbershop.modules.person.dto.PersonasRolName;
+import com.barbershop.modules.person.dto.RequestPerson;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,10 @@ public class PersonController {
     @GetMapping("/personrol/{id}")
     public List<PersonasRolName> findPersonRolesName(@PathVariable Long id) {
         return this.personService.findPersonRolesName(id);
+    }
+
+    @PostMapping("/savePerson")
+    public ResponseEntity<?> saveRequestPerson(@RequestBody RequestPerson requestPerson) {
+        return this.personService.saveRequestPerson(requestPerson);
     }
 }
