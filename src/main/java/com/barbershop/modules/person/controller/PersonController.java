@@ -1,8 +1,8 @@
 package com.barbershop.modules.person.controller;
 
-import com.barbershop.common.exception.UserNotFoundException;
 import com.barbershop.modules.person.dto.PersonDto;
 import com.barbershop.modules.person.dto.PersonRoleDto;
+import com.barbershop.modules.person.dto.PersonasRolName;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,4 +69,24 @@ public class PersonController {
         return ResponseEntity.ok("Persona eliminado correctamente -> " + id);
     }
 
+    //Buscar personas por un mismo rol -> id ->  ?id=2
+    @GetMapping("/buscar")
+    public List<PersonDto> findPersonsByRole(@RequestParam Long id) {
+        List<Person> person = this.personService.findPersonsByRole(id);
+        List<PersonDto> personDto = person.stream()
+                .map(p -> new PersonDto(p.getName(), p.getLastName(), p.getEmail(), p.getPhone())).toList();
+        return personDto;
+    }
+
+    //Buscar nombre del rol por id
+    @GetMapping("/buscar/{id}")
+    public String findNameRolByPerson(@PathVariable Long id) {
+        return this.personService.findNameRolByPerson(id);
+    }
+
+    //Buscar personas con cierto rol y devolver un dto con esa info
+    @GetMapping("/personrol/{id}")
+    public List<PersonasRolName> findPersonRolesName(@PathVariable Long id) {
+        return this.personService.findPersonRolesName(id);
+    }
 }

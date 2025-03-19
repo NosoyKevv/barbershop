@@ -1,8 +1,11 @@
 package com.barbershop.modules.person.service;
 
 import com.barbershop.common.exception.UserNotFoundException;
+import com.barbershop.modules.person.dto.PersonasRolName;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.repository.PersonRepository;
+import com.barbershop.modules.role.model.Roles;
+import com.barbershop.modules.role.repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ public class PersonService implements IPersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private RolesRepository rolesRepository;
 
     @Override
     public List<Person> findAllPerson() {
@@ -39,6 +44,24 @@ public class PersonService implements IPersonService {
                         () -> new UserNotFoundException("Persona no encontrado con ID: " + id));
         this.personRepository.delete(person);
         return ResponseEntity.ok().build();
+    }
+
+    public List<Person> findPersonsByRole(Long id) {
+        return personRepository.findPersonsByRole(id);
+    }
+
+    public String findNameRolByPerson(Long id) {
+        if (!this.rolesRepository.existsById(id)) {
+            throw new UserNotFoundException("Rol no encontrado con ID: " + id);
+        }
+        return this.personRepository.findNameByRole(id);
+    }
+
+    public List<PersonasRolName> findPersonRolesName(Long id) {
+        if (!this.rolesRepository.existsById(id)) {
+            throw new UserNotFoundException("Rol no encontrado con ID: " + id);
+        }
+        return this.personRepository.findPersonRolesName(id);
     }
 }
 
