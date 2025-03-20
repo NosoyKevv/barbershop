@@ -24,10 +24,10 @@ public class AppointmentResponse {
     private Date date;
 
     @NotNull(message = "el date_time es obligatorio")
-    @JsonProperty(value = "appointment_dateTime")
+    @JsonProperty(value = "appointment_date_time")
     private Time dateTime;
 
     @NotNull(message = "el user_id es obligatorio")
-    @JsonProperty(value = "appointment_userName")
+    @JsonProperty(value = "appointment_user_name")
     private String userName;
 }
