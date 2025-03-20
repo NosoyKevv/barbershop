@@ -7,7 +7,7 @@ import com.barbershop.modules.appointment.dto.AppointmentRequest;
 
 public interface AppointmentService {
 
-    AppointmentResponse findByAppointmentId(long id);
+    AppointmentResponse findByAppointmentId(Long id);
 
     void create(AppointmentCreate request);
 

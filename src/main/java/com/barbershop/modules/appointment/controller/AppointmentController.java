@@ -26,13 +26,20 @@ public class AppointmentController {
 
     @GetMapping("/{id}")
     @Operation(description = "Find appointment by id")
-    public AppointmentResponse findById(@PathVariable long id) {
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Appointment exist"),
+            @ApiResponse(responseCode = "404", description = "Appointment not found")
+    })
+    public AppointmentResponse findById(@PathVariable Long id) {
         return appointmentService.findByAppointmentId(id);
     }
 
     @PostMapping("/")
     @Operation(description = "Created new appointment")
-    @ApiResponse(responseCode = "201", description = "Appointment created")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Appointment created"),
+            @ApiResponse(responseCode = "409", description = "Conflict: Description already in use")
+    })
     public ResponseEntity<HttpStatus> createdAppointment(@Valid @RequestBody AppointmentCreate appointmentCreate) {
         appointmentService.create(appointmentCreate);
         return new ResponseEntity<>(HttpStatus.CREATED);
