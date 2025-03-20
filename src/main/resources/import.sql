@@ -16,4 +16,4 @@ INSERT INTO barbershop.users (created_date_time, person_id, password, username,a
 INSERT INTO barbershop.users (created_date_time, person_id, password, username,active)VALUES (current_timestamp, 3, '12345', 'pepe',TRUE);
 
 --INSERTAR CITAS AL SITEMA
-INSERT INTO barbershop.appointment (date_time, created_date_time, date, user_id, description) VALUES ('12:00:00',current_timestamp,'2024-03-09',1,'EL MOICANO')
+INSERT INTO barbershop.appointment (date_time, created_date_time, date, user_id, description, active) VALUES ('12:00:00',current_timestamp,'2024-03-09',1,'EL MOICANO',TRUE)
