@@ -1,5 +1,6 @@
 package com.barbershop.modules.user.service;
 
+import com.barbershop.common.exception.ResourceNotFoundException;
 import com.barbershop.common.exception.UserNotFoundException;
 import com.barbershop.modules.user.model.Users;
 import com.barbershop.modules.user.repository.UsersRepository;
@@ -44,6 +45,12 @@ public class UsersService implements IUsersService {
         this.usersRepository.save(user);
 
         return ResponseEntity.ok("Usuario desactivado correctamente -> " + id);
+    }
+
+    @Override
+    public String findNameById(Long id) {
+        return usersRepository.findById(id).map(Users::getUsername)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
     }
 
 

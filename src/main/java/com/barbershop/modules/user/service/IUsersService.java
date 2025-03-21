@@ -15,4 +15,6 @@ public interface IUsersService {
 
      ResponseEntity<String> deleteUser(Long id);
 
+     String findNameById(Long id);
+
 }

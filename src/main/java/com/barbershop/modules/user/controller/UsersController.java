@@ -60,4 +60,9 @@ public class UsersController {
         this.usersService.deleteUser(id);
         return ResponseEntity.ok("Usuario eliminado correctamente -> " + id);
     }
+
+    @GetMapping("/name/{id}")
+    public String findNameById(@PathVariable Long id) {
+        return this.usersService.findNameById(id);
+    }
 }
