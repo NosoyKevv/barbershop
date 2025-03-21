@@ -10,8 +10,8 @@ import lombok.Getter;
 import java.sql.Time;
 import java.util.Date;
 
-@Getter
 @AllArgsConstructor
+@Getter
 public class AppointmentList {
     @NotBlank
     @Size(max = 50)

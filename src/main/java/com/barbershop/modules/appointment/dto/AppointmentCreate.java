@@ -5,14 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Time;
 import java.util.Date;
 
 
 @Getter
-@Setter
 public class AppointmentCreate {
     @NotBlank
     @Size(max = 50)
