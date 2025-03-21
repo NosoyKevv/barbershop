@@ -3,14 +3,19 @@ package com.barbershop.modules.appointment.service.Impl;
 import com.barbershop.common.exception.ResourceConflictException;
 import com.barbershop.common.exception.ResourceNotFoundException;
 import com.barbershop.modules.appointment.dto.AppointmentCreate;
+import com.barbershop.modules.appointment.dto.AppointmentList;
 import com.barbershop.modules.appointment.dto.AppointmentRequest;
 import com.barbershop.modules.appointment.dto.AppointmentResponse;
 import com.barbershop.modules.appointment.model.Appointment;
 import com.barbershop.modules.appointment.repository.AppointmentRepository;
 import com.barbershop.modules.appointment.service.AppointmentService;
 import com.barbershop.modules.user.service.UsersService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -70,7 +75,24 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointment.getDescription(),
                 appointment.getDate(),
                 appointment.getDateTime(),
-                appointment.getUser().getUsername()
+                usersService.findNameById(request.getUserId())
         );
+    }
+
+    @Override
+    public void delete(Long id) {
+        Appointment appointment = appointmentRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No se encontro el appointment"));
+
+        appointment.setActive(false);
+        appointmentRepository.save(appointment);
+    }
+
+    @Override
+    public Page<AppointmentList> findAll(Long userId, Pageable pageable) {
+        if (usersService.findUserById(userId) == null) {
+            throw new ResourceNotFoundException("No se encontro el usuario");
+        }
+        return appointmentRepository.findAllAppointmentBarberName(userId, pageable);
     }
 }

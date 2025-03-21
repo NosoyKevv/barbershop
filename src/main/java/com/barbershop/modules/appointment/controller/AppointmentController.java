@@ -1,5 +1,9 @@
 package com.barbershop.modules.appointment.controller;
 
+import com.barbershop.modules.appointment.dto.AppointmentList;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import com.barbershop.modules.appointment.dto.AppointmentCreate;
 import com.barbershop.modules.appointment.dto.AppointmentRequest;
@@ -12,6 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/barbershop/Appointment")
@@ -54,6 +60,24 @@ public class AppointmentController {
     })
     public AppointmentResponse updatedAppointment(@Valid @PathVariable Long id, @RequestBody AppointmentRequest request) {
         return appointmentService.update(id, request);
+    }
+
+    @PutMapping("/delete/{id}")
+    @Operation(description = "Delete soft")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Appointment deleted soft"),
+            @ApiResponse(responseCode = "404", description = "Appointment not found"),
+    })
+    public void deleteAppointment(@PathVariable Long id) {
+        appointmentService.delete(id);
+    }
+
+    @GetMapping("/listAppointment/{id}")
+    public Page<AppointmentList> findAll(@PathVariable Long id,
+                                         @RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return appointmentService.findAll(id, pageable);
     }
 
 }
