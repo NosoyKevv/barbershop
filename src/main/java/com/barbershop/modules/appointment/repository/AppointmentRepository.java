@@ -16,6 +16,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("SELECT new com.barbershop.modules.appointment.dto.AppointmentList (a.description,a.date,a.dateTime,p.name) FROM Appointment a " +
             "INNER JOIN a.user u " +
             "INNER JOIN u.person p " +
-            "WHERE u.id =:userId AND a.active = TRUE")
+            "WHERE u.id =:userId AND a.active = TRUE " +
+            "ORDER BY a.createdDateTime DESC ")
     Page<AppointmentList> findAllAppointmentBarberName(@Param("userId") Long userId, Pageable pageable);
 }
