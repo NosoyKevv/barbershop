@@ -17,7 +17,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/barbershop/Appointment")
@@ -73,6 +72,11 @@ public class AppointmentController {
     }
 
     @GetMapping("/listAppointment/{id}")
+    @Operation(description = "List all")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Appointment list all"),
+            @ApiResponse(responseCode = "404", description = "Appointment user not found")
+    })
     public Page<AppointmentList> findAll(@PathVariable Long id,
                                          @RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "5") int size) {
