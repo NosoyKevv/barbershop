@@ -4,10 +4,10 @@ INSERT INTO barbershop.roles(name, created_date_time)VALUES ('BARBERO', current_
 INSERT INTO barbershop.roles(name, created_date_time)VALUES ('CLIENTE', current_timestamp);
 
 --CREAR PERSONA
-INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone)VALUES (current_timestamp, 1, 'kevinlazarok23@gmail.com', 'vergel', 'kevin', '123456');
-INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone)VALUES (current_timestamp, 2, 'ksvergel@gmail.com', 'lazaro', 'santiago', '654321');
-INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone)VALUES (current_timestamp, 3, 'pepito@gmail.com', 'perez', 'pepe', '112233');
-INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone)VALUES (current_timestamp, 3, 'aguacate@gmail.com', 'gomez', 'aguacate', '112233');
+INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone, document_type)VALUES (current_timestamp, 1, 'kevinlazarok23@gmail.com', 'vergel', 'kevin', '123456','Cédula de ciudadania');
+INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone, document_type)VALUES (current_timestamp, 2, 'ksvergel@gmail.com', 'lazaro', 'santiago', '654321','Cédula de ciudadania');
+INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone, document_type)VALUES (current_timestamp, 3, 'pepito@gmail.com', 'perez', 'pepe', '112233','Cédula de ciudadania');
+INSERT INTO barbershop.person(created_date_time, role_id, email, last_name, name, phone, document_type)VALUES (current_timestamp, 3, 'aguacate@gmail.com', 'gomez', 'aguacate', '112233','Cédula de ciudadania');
 
 --INSERTAR USUARIOS DEL SISTEMA
 

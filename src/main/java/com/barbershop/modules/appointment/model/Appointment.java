@@ -15,7 +15,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class Appointment extends BaseEntity {
+
     private String description;
+
     private Date date;
 
     @Column(name = "date_time")
