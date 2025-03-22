@@ -1,5 +1,6 @@
 package com.barbershop.modules.personNew.dto;
 
+import com.barbershop.common.utils.document_type.DocumentType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +32,7 @@ public class PersonCreate {
     @NotNull(message = "person document type obligatorio")
     @Size(max = 50)
     @JsonProperty(value = "document_type")
-    private String documentType;
+    private DocumentType documentType;
 
     @NotBlank
     @JsonProperty(value = "person_rol_id")

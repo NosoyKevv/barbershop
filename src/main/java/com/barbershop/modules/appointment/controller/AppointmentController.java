@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/barbershop/Appointment")
-@Tag(name = "Appointment", description = "API Appointment")
+@Tag(name = "Appointment", description = "EndPoints Appointment")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;

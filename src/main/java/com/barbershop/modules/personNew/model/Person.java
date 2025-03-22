@@ -41,7 +41,7 @@ public class Person extends BaseEntity {
         this.role = role;
     }
 
-    public static Person createPerson(String name, String lastName, String email, String phone, String documentType, Roles role) {
-        return new Person(name, lastName, email, phone, DocumentType.fromValue(documentType), role);
+    public static Person createPerson(String name, String lastName, String email, String phone, DocumentType documentType, Roles role) {
+        return new Person(name, lastName, email, phone, documentType, role);
     }
 }
