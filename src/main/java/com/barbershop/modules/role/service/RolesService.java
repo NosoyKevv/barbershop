@@ -1,5 +1,6 @@
 package com.barbershop.modules.role.service;
 
+import com.barbershop.common.exception.ResourceNotFoundException;
 import com.barbershop.common.exception.UserNotFoundException;
 import com.barbershop.modules.role.model.Roles;
 import com.barbershop.modules.role.repository.RolesRepository;
@@ -40,4 +41,11 @@ public class RolesService implements IRolesService {
 
         return ResponseEntity.ok("Rol eliminado correctamente -> " + id);
     }
+
+    public String findRoleNameById(Long id) {
+        return rolesRepository.findById(id)
+                .map(Roles::getName)
+                .orElseThrow(() -> new ResourceNotFoundException("Role with ID " + id + " not found"));
+    }
+
 }

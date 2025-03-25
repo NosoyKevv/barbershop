@@ -25,6 +25,8 @@ public class Person extends BaseEntity {
 
     private DocumentType documentType;
 
+    private Boolean active = true;
+
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private Users user;
 
