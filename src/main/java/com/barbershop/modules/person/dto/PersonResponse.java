@@ -1,4 +1,4 @@
-package com.barbershop.modules.personNew.dto;
+package com.barbershop.modules.person.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

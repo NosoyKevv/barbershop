@@ -1,7 +1,7 @@
-package com.barbershop.modules.personNew.service;
+package com.barbershop.modules.person.service;
 
-import com.barbershop.modules.personNew.dto.PersonCreate;
-import com.barbershop.modules.personNew.dto.PersonResponse;
+import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

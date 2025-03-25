@@ -1,4 +1,4 @@
-package com.barbershop.modules.personNew.model;
+package com.barbershop.modules.person.model;
 
 import com.barbershop.common.utils.BaseEntity;
 import com.barbershop.common.utils.document_type.DocumentType;

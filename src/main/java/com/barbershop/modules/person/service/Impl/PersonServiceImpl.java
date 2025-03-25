@@ -1,12 +1,12 @@
-package com.barbershop.modules.personNew.service.Impl;
+package com.barbershop.modules.person.service.Impl;
 
 import com.barbershop.common.exception.ResourceConflictException;
 import com.barbershop.common.exception.ResourceNotFoundException;
-import com.barbershop.modules.personNew.dto.PersonCreate;
-import com.barbershop.modules.personNew.dto.PersonResponse;
-import com.barbershop.modules.personNew.model.Person;
-import com.barbershop.modules.personNew.repository.PersonRepository;
-import com.barbershop.modules.personNew.service.PersonService;
+import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonResponse;
+import com.barbershop.modules.person.model.Person;
+import com.barbershop.modules.person.repository.PersonRepository;
+import com.barbershop.modules.person.service.PersonService;
 import com.barbershop.modules.role.repository.RolesRepository;
 import com.barbershop.modules.role.service.RolesService;
 import org.springframework.data.domain.Page;
@@ -40,7 +40,6 @@ public class PersonServiceImpl implements PersonService {
                 rolesService.findRoleById(request.getRolId())
         );
         personRepository.save(person);
-
     }
 
     @Override

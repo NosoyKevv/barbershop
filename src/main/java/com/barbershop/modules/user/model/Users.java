@@ -2,7 +2,7 @@ package com.barbershop.modules.user.model;
 
 import com.barbershop.common.utils.BaseEntity;
 import com.barbershop.modules.appointment.model.Appointment;
-import com.barbershop.modules.personNew.model.Person;
+import com.barbershop.modules.person.model.Person;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

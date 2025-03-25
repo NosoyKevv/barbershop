@@ -1,7 +1,7 @@
 package com.barbershop.modules.role.model;
 
 import com.barbershop.common.utils.BaseEntity;
-import com.barbershop.modules.personNew.model.Person;
+import com.barbershop.modules.person.model.Person;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;

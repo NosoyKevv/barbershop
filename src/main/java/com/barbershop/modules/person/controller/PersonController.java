@@ -1,8 +1,8 @@
-package com.barbershop.modules.personNew.controller;
+package com.barbershop.modules.person.controller;
 
-import com.barbershop.modules.personNew.dto.PersonCreate;
-import com.barbershop.modules.personNew.dto.PersonResponse;
-import com.barbershop.modules.personNew.service.PersonService;
+import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonResponse;
+import com.barbershop.modules.person.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
