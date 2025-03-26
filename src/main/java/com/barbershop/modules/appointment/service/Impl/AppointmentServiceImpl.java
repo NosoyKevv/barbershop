@@ -49,7 +49,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 request.getDescription(),
                 request.getDate(),
                 request.getDateTime(),
-                usersService.findUserById(request.getUserId())
+                usersService.findById(request.getUserId())
         );
         appointmentRepository.save(appointment);
     }
@@ -66,7 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setDescription(request.getDescription());
         appointment.setDate(request.getDate());
         appointment.setDateTime(request.getDateTime());
-        appointment.setUser(usersService.findUserById(request.getUserId()));
+        appointment.setUser(usersService.findById(request.getUserId()));
 
         appointmentRepository.save(appointment);
 
@@ -74,7 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 appointment.getDescription(),
                 appointment.getDate(),
                 appointment.getDateTime(),
-                usersService.findNameById(request.getUserId())
+                usersService.findUsernameById(request.getUserId())
         );
     }
 
@@ -89,9 +89,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Page<AppointmentList> findAll(Long userId, Pageable pageable) {
-        if (usersService.findUserById(userId) == null) {
+        if (usersService.findById(userId) == null) {
             throw new ResourceNotFoundException("No se encontro el usuario");
         }
+
         return appointmentRepository.findAllAppointmentBarberName(userId, pageable);
     }
 }

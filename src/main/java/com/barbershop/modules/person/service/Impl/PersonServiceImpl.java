@@ -93,4 +93,9 @@ public class PersonServiceImpl implements PersonService {
 
         personRepository.save(person);
     }
+
+    @Override
+    public Person findById(Long id) {
+        return personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+    }
 }

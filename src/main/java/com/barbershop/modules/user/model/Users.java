@@ -4,7 +4,6 @@ import com.barbershop.common.utils.BaseEntity;
 import com.barbershop.modules.appointment.model.Appointment;
 import com.barbershop.modules.person.model.Person;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -27,4 +25,14 @@ public class Users extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
+
+    public Users(String username, String password, Person person) {
+        this.username = username;
+        this.password = password;
+        this.person = person;
+    }
+
+    public static Users createUser(String username, String password, Person person) {
+        return new Users(username, password, person);
+    }
 }

@@ -2,6 +2,7 @@ package com.barbershop.modules.person.controller;
 
 import com.barbershop.modules.person.dto.PersonCreate;
 import com.barbershop.modules.person.dto.PersonResponse;
+import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -82,5 +83,15 @@ public class PersonController {
     })
     public void delete(@PathVariable Long id) {
         personService.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(description = "Find by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Person exists"),
+            @ApiResponse(responseCode = "404", description = "Person id not found")
+    })
+    public Person findById(@PathVariable Long id) {
+        return personService.findById(id);
     }
 }
