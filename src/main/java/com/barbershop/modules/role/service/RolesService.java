@@ -1,51 +1,24 @@
 package com.barbershop.modules.role.service;
 
-import com.barbershop.common.exception.ResourceNotFoundException;
-import com.barbershop.common.exception.UserNotFoundException;
+import com.barbershop.modules.role.dto.RoleCreate;
+import com.barbershop.modules.role.dto.RoleResponse;
 import com.barbershop.modules.role.model.Roles;
-import com.barbershop.modules.role.repository.RolesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+public interface RolesService {
 
-@Service
-public class RolesService implements IRolesService {
 
-    @Autowired
-    private RolesRepository rolesRepository;
+    void create(RoleCreate request);
 
-    @Override
-    public List<Roles> listRoles() {
-        return this.rolesRepository.findAll();
-    }
+    Roles findRoleById(Long id);
 
-    @Override
-    public Roles findRoleById(Long id) {
-        return this.rolesRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Rol no encontrado con ID: " + id));
-    }
+    String findRoleNameById(Long id);
 
-    @Override
-    public Roles saveRoles(Roles roles) {
-        return this.rolesRepository.save(roles);
-    }
+    RoleResponse update(@PathVariable Long id, RoleCreate request);
 
-    @Override
-    public ResponseEntity<String> deleteRoles(Long id) {
-        if (!this.rolesRepository.existsById(id)) {
-            throw new UserNotFoundException("Rol no encontrado con ID: " + id);
-        }
-        this.rolesRepository.deleteById(id);
+    void delete(Long id);
 
-        return ResponseEntity.ok("Rol eliminado correctamente -> " + id);
-    }
-
-    public String findRoleNameById(Long id) {
-        return rolesRepository.findById(id)
-                .map(Roles::getName)
-                .orElseThrow(() -> new ResourceNotFoundException("Role with ID " + id + " not found"));
-    }
-
+    Page<RoleResponse> list(Pageable pageable);
 }

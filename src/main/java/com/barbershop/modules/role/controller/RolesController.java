@@ -1,63 +1,75 @@
 package com.barbershop.modules.role.controller;
 
-import com.barbershop.modules.role.dto.RolesDto;
-import com.barbershop.modules.role.model.Roles;
-import com.barbershop.modules.role.service.IRolesService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.barbershop.modules.role.dto.RoleCreate;
+import com.barbershop.modules.role.dto.RoleResponse;
+import com.barbershop.modules.role.service.Impl.RolesServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/barbershop/roles")
+@Tag(name = "Roles", description = "EndPoints Roles")
 public class RolesController {
 
-    @Autowired
-    private IRolesService rolesService;
+    private final RolesServiceImpl rolesService;
 
-    @GetMapping
-    public ResponseEntity<List<RolesDto>> listRoles() {
-        List<Roles> roles = rolesService.listRoles();
-        List<RolesDto> rolesDto = roles.stream()
-                .map(role -> new RolesDto(role.getId(), role.getName())).toList();
-        return ResponseEntity.ok(rolesDto);
+    public RolesController(RolesServiceImpl rolesService) {
+        this.rolesService = rolesService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RolesDto> findRoleById(@PathVariable Long id) {
-        Roles role = this.rolesService.findRoleById(id);
-        RolesDto rolesDto = new RolesDto(role.getId(), role.getName());
-        return ResponseEntity.ok(rolesDto);
-    }
-
-    @PostMapping
-    public ResponseEntity<RolesDto> createRole(@RequestBody Roles roles) {
-        Roles role = this.rolesService.saveRoles(roles);
-        RolesDto rolesDto = new RolesDto(role.getId(), role.getName());
-        return ResponseEntity.ok(rolesDto);
+    @PostMapping("/")
+    @Operation(description = "Created rol")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Rol created"),
+            @ApiResponse(responseCode = "409", description = "Rol name already exists")
+    })
+    public ResponseEntity<HttpStatus> create(@Valid @RequestBody RoleCreate request) {
+        rolesService.create(request);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RolesDto> updateRole(@PathVariable Long id, @RequestBody RolesDto requestRoleDto) {
-        Roles role = this.rolesService.findRoleById(id);
-        if (role == null) {
-            return ResponseEntity.notFound().build();
-        }
-        role.setName(requestRoleDto.getName());
-
-        this.rolesService.saveRoles(role);
-
-        RolesDto rolesDto = new RolesDto(role.getId(), role.getName());
-        return ResponseEntity.ok(rolesDto);
+    @Operation(description = "Updated rol")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Rol created"),
+            @ApiResponse(responseCode = "404", description = "Rol id not found"),
+            @ApiResponse(responseCode = "409", description = "Rol name already exists")
+    })
+    public ResponseEntity<RoleResponse> update(@Valid @PathVariable Long id, @RequestBody RoleCreate request) {
+        rolesService.update(id, request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRole(@PathVariable Long id) {
-        this.rolesService.deleteRoles(id);
-        return ResponseEntity.ok("Rol eliminado correctamente -> " + id);
-
+    @PutMapping("/delete/{id}")
+    @Operation(description = "Deleted rol")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Rol deleted"),
+            @ApiResponse(responseCode = "404", description = "Rol id not found")
+    })
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
+        rolesService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @GetMapping("/all")
+    @Operation(description = "List all")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Roles listed"),
+    })
+    public Page<RoleResponse> getAll(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return rolesService.list(pageable);
+    }
 }

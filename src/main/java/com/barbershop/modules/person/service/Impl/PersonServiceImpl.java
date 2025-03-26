@@ -8,7 +8,7 @@ import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.repository.PersonRepository;
 import com.barbershop.modules.person.service.PersonService;
 import com.barbershop.modules.role.repository.RolesRepository;
-import com.barbershop.modules.role.service.RolesService;
+import com.barbershop.modules.role.service.Impl.RolesServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,10 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
 
-    private final RolesService rolesService; //todo CAMBIAR A NEW
+    private final RolesServiceImpl rolesService; //todo CAMBIAR A NEW
     private final RolesRepository rolesRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository, RolesService rolesService, RolesRepository rolesRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, RolesServiceImpl rolesService, RolesRepository rolesRepository) {
         this.personRepository = personRepository;
         this.rolesService = rolesService;
         this.rolesRepository = rolesRepository;
