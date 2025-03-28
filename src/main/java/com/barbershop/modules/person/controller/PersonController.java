@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/barbershop/Person")
@@ -93,5 +95,12 @@ public class PersonController {
     })
     public Person findById(@PathVariable Long id) {
         return personService.findById(id);
+    }
+
+    @GetMapping("/criteria/{name}")
+    @Operation(description = "Consulta criteria")
+    @ApiResponse(responseCode = "200", description = "Generated list")
+    public List<PersonResponse> criteria(@PathVariable("name") String roleName) {
+        return personService.criteria(roleName);
     }
 }

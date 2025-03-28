@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -97,5 +99,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findById(Long id) {
         return personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+    }
+
+    @Override
+    public List<PersonResponse> criteria(String roleName) {
+        return personRepository.findPersonByRolAndLastName(roleName);
     }
 }
