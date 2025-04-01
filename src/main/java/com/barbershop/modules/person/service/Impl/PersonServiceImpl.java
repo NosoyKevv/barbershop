@@ -3,6 +3,7 @@ package com.barbershop.modules.person.service.Impl;
 import com.barbershop.common.exception.ResourceConflictException;
 import com.barbershop.common.exception.ResourceNotFoundException;
 import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonRequest;
 import com.barbershop.modules.person.dto.PersonResponse;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.repository.PersonRepository;
@@ -102,7 +103,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonResponse> criteria(String roleName) {
-        return personRepository.findPersonByRolAndLastName(roleName);
+    public List<PersonResponse> criteria(PersonRequest request) {
+        return personRepository.findPersonByRolAndLastName(request);
     }
 }

@@ -1,5 +1,6 @@
 package com.barbershop.modules.person.repository.Impl;
 
+import com.barbershop.modules.person.dto.PersonRequest;
 import com.barbershop.modules.person.dto.PersonResponse;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.model.Person_;
@@ -10,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +22,7 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom {
 
     @Override
 //    public List<PersonResponse> findPersonByRolAndLastName(Long id, String lastName) {
-    public List<PersonResponse> findPersonByRolAndLastName(String rolName) {
-
+    public List<PersonResponse> findPersonByRolAndLastName(PersonRequest request) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         List<PersonResponse> result = null;
 
@@ -39,13 +40,29 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom {
                             rolesJoin.get(Roles_.name)
                     )
             );
-            cq.where(cb.equal(rolesJoin.get(Roles_.name), rolName));    //,cb.equal(root.get(Person_.lastName),lastName)
+
+            // Lista de predicados
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (request.getRolName() != null && !request.getRolName().isEmpty()) {
+                predicates.add(cb.equal(rolesJoin.get(Roles_.name), request.getRolName()));
+            }
+            if (request.getEmail() != null && !request.getEmail().isEmpty()) {
+                predicates.add(cb.like(cb.lower(root.get(Person_.email)), "%" + request.getEmail().toLowerCase() + "%"));
+            }
+
+            // Aplicar los predicados a la consulta
+            if (!predicates.isEmpty()) {
+                cq.where(predicates.toArray(new Predicate[0]));
+            }
+
             result = em.createQuery(cq).getResultList();
         } catch (Exception ex) {
-            System.out.println("Error en consulta Criteria getAllDiagnostics  {} " + ex.getMessage());
+            System.out.println("Error en consulta Criteria findPersonByRolAndLastName {} " + ex.getMessage());
+        } finally {
+            em.close();
         }
-        em.close();
         return result;
     }
-}
 
+}

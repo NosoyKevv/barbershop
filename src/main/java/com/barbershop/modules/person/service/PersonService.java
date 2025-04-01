@@ -1,6 +1,7 @@
 package com.barbershop.modules.person.service;
 
 import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonRequest;
 import com.barbershop.modules.person.dto.PersonResponse;
 import com.barbershop.modules.person.model.Person;
 import org.springframework.data.domain.Page;
@@ -23,5 +24,5 @@ public interface PersonService {
 
     Person findById(Long id);
 
-    List<PersonResponse> criteria(String rolName);
+    List<PersonResponse> criteria(PersonRequest request);
 }

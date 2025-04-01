@@ -1,6 +1,7 @@
 package com.barbershop.modules.person.controller;
 
 import com.barbershop.modules.person.dto.PersonCreate;
+import com.barbershop.modules.person.dto.PersonRequest;
 import com.barbershop.modules.person.dto.PersonResponse;
 import com.barbershop.modules.person.model.Person;
 import com.barbershop.modules.person.service.PersonService;
@@ -97,10 +98,10 @@ public class PersonController {
         return personService.findById(id);
     }
 
-    @GetMapping("/criteria/{name}")
+    @PostMapping("/criteria")
     @Operation(description = "Consulta criteria")
     @ApiResponse(responseCode = "200", description = "Generated list")
-    public List<PersonResponse> criteria(@PathVariable("name") String roleName) {
-        return personService.criteria(roleName);
+    public List<PersonResponse> criteria(@RequestBody PersonRequest request) {
+        return personService.criteria(request);
     }
 }
